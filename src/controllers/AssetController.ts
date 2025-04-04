@@ -48,11 +48,14 @@ export class AssetController {
                 return
             }
 
-            // Ensures the user has permission to view the asset
+            if(req.user.role === "Operario"){
+                // Ensures the user has permission to view the asset
             if (asset.user.toString() !== req.user.id) {
                 res.status(403).json({ message: "No tienes permisos para acceder a este activo" })
                 return
             }
+            }
+            
 
             res.json(asset)
         } catch (error) {
